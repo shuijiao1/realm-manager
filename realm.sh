@@ -4,7 +4,7 @@
 
 set -Eeuo pipefail
 
-VERSION="0.1.3"
+VERSION="0.1.0"
 REPO_RAW="https://raw.githubusercontent.com/shuijiao1/Realm-Manager/main"
 UPDATE_URL="$REPO_RAW/realm.sh"
 VERSION_URL="$REPO_RAW/version.txt"
