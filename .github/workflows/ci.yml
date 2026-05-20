@@ -13,7 +13,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Install ShellCheck and shfmt
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y shellcheck
+          curl -fsSL -o /tmp/shfmt https://github.com/mvdan/sh/releases/download/v3.12.0/shfmt_v3.12.0_linux_amd64
+          sudo install -m 0755 /tmp/shfmt /usr/local/bin/shfmt
       - name: Bash syntax
-        run: bash -n release.sh realm.sh release.sh scripts/security-scan.sh
+        run: bash -n release.sh realm.sh scripts/security-scan.sh
+      - name: ShellCheck
+        run: shellcheck -e SC2015,SC2034,SC2059 -x release.sh realm.sh scripts/security-scan.sh
+      - name: shfmt
+        run: shfmt -d release.sh realm.sh scripts/security-scan.sh
       - name: Secret scan
         run: bash scripts/security-scan.sh

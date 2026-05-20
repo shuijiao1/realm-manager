@@ -51,8 +51,10 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           tag="${{ steps.vars.outputs.tag }}"
+          assets=(realm.sh)
           if gh release view "$tag" >/dev/null 2>&1; then
             gh release edit "$tag" --title "$tag" --notes-file /tmp/release-notes.md
+            gh release upload "$tag" "${assets[@]}" --clobber
           else
-            gh release create "$tag" --title "$tag" --notes-file /tmp/release-notes.md
+            gh release create "$tag" "${assets[@]}" --title "$tag" --notes-file /tmp/release-notes.md
           fi

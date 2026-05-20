@@ -2,7 +2,7 @@
 set -euo pipefail
 
 usage() {
-  cat <<'HELP'
+	cat <<'HELP'
 Usage: ./release.sh <version> "release notes"
 
 Example:
@@ -19,17 +19,17 @@ HELP
 version="${1:-}"
 notes="${2:-}"
 if [[ -z "$version" || -z "$notes" || "$version" == "-h" || "$version" == "--help" ]]; then
-  usage
-  exit 1
+	usage
+	exit 1
 fi
 if [[ ! "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-  echo "version must be semantic version like 0.1.2" >&2
-  exit 1
+	echo "version must be semantic version like 0.1.2" >&2
+	exit 1
 fi
 if [[ -n "$(git status --porcelain)" ]]; then
-  echo "working tree is not clean" >&2
-  git status --short
-  exit 1
+	echo "working tree is not clean" >&2
+	git status --short
+	exit 1
 fi
 
 python3 - "$version" "$notes" <<'PYHELP'

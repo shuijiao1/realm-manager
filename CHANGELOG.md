@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.4] - 2026-05-20
+
+- 补充 Issue 模板，增强 shellcheck/shfmt CI，并在 Release 中附带脚本文件。
+
 ## [0.1.3] - 2026-05-20
 
 - 加入基础 CI、防泄密检查、Actions Node24 兼容设置和本地项目健康检查。
